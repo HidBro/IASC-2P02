@@ -1,0 +1,50 @@
+body {
+    width: 40%;
+    color: white
+    
+
+}
+
+
+h1{
+    color: white;
+    font: size 48px;
+    text-align: center;
+
+}
+
+h2{
+    font-size: 36px;
+    text-align: center;
+}
+
+p{
+    font-size: 28px;
+ 
+}
+
+.clickable{
+        cursor: pointer;
+}
+
+.clickable:hover{
+    color: cyan;
+    text-decoration: underline;
+    /* font-size: 5px; */
+}
+
+.hidden{
+    display:none
+}
+
+.webgl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+    z-index: -1;
+}
+
+#part2{
+    color: white;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <title>Interactive Essay</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- three.js importmap -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://ga.jspm.io/npm:three@0.158.0/build/three.module.js",
+                "OrbitControls": "https://ga.jspm.io/npm:three@0.158.0/examples/jsm/controls/OrbitControls.js",
+                "lil-gui": "https://ga.jspm.io/npm:lil-gui@0.19.1/dist/lil-gui.esm.js"
+            }
+        }
+    </script>
+
+    <!-- three.js scene -->
+    <script src="script.js" type="module"></script>
+</head>
+<body>
+    <h1 >Interactive Essay</h1>
+    <p style="text-align:center">By Fahd Gebi</p>
+
+    <section id="part-one">
+        <h2> PART 1: THE BEGINNING</h2>
+
+        <p>The Beginning</p>
+
+        <p>dsahasllbdsabldsblabljl <span class="clickable" id="first-change",>CLICK FOR MORE</span></p>
+    </section>
+
+    <section id="part-two" class="hidden">
+        <h2 style="color:rgb(3, 25, 31);text-align: right">PART 2: CONTINUEED...</h2> <span>
+     
+        <p >more woooooooooooords</p>   <div></div>
+
+        <p>dshailldsahdsabdsbl. <span class="clickable" id="first-change",>CLICK HERE</span></p>
+
+    </section>
+
+    <canvas class="webgl"></canvas>
+</body>
