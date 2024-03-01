@@ -75,19 +75,26 @@ caveFloor.position.set(0, -2.5, 0)
 scene.add(caveFloor)
 
 // OBJECTS
-// torusKnot
-const torusKnotGeometry = new THREE.TorusKnotGeometry(1, 0.2)
+// torusKnot( 5, 3, 5, 16 )
+const torusKnotGeometry = new THREE.TorusKnotGeometry( 1, .6, 5.5, 16 );
 const torusKnotMaterial = new THREE.MeshNormalMaterial()
 const torusKnot = new THREE.Mesh(torusKnotGeometry, torusKnotMaterial)
-torusKnot.position.set(6, 1.5, 0)
+torusKnot.position.set(1.5, 3, 30)
 torusKnot.castShadow = true
 scene.add(torusKnot)
+
+// const torusGeometry = new THREE.TorusKnotGeometry( 1, .6, 5.5, 16 );
+// const torusMaterial = new THREE.MeshNormalMaterial()
+// const torus = new THREE.Mesh(torusGeometry, torusMaterial)
+// torusKnot.position.set(1.5, 3, 30)
+// torusKnot.castShadow = true
+// scene.add(torus)
 
 // SUN
 const sunGeometry = new THREE.SphereGeometry()
 const sunMaterial = new THREE.MeshLambertMaterial({
     emissive: new THREE.Color('orange'),
-    emissiveIntensity: 20
+    emissiveIntensity: 40
 })
 const sun = new THREE.Mesh(sunGeometry, sunMaterial)
 scene.add(sun)
@@ -95,13 +102,13 @@ scene.add(sun)
 /***********
 ** LIGHTS **
 ************/
-/*
-// Ambient Light
-const ambientLight = new THREE.AmbientLight(
-    new THREE.Color('white')
-)
-scene.add(ambientLight)
-*/
+// /*
+// // Ambient Light
+// const ambientLight = new THREE.AmbientLight(
+//     new THREE.Color('white')
+// )
+// scene.add(ambientLight)
+// */
 
 // Direcional Light
 const directionalLight = new THREE.DirectionalLight(
@@ -123,6 +130,8 @@ scene.add(directionalLight)
 ** UI **
 ********/
 //
+
+/*
 const ui = new dat.GUI()
 
 const uiObject = {}
@@ -156,10 +165,35 @@ lightPositionFolder
 lightPositionFolder
     .add(uiObject, 'reset')
     .name('Reset position')
+   
+   
     /*
+/*********************
+** DOM INTERACTIONS **
+**********************/
+
+//continue-reading
+document.querySelector('#continue-reading').onclick = function() {
+    document.querySelector('#part-two').classList.remove('hidden')
+    document.querySelector('#part-one').classList.add('hidden')
+    domObject.part = 2
+    
+}
+
+// restart
+document.querySelector('#restart').onclick = function() {
+    document.querySelector("#part-two").classList.add('hidden')
+    document.querySelector('#part-one').classList.remove('hidden')
+}
 
 
+// first change
 
+// second change
+
+// third change
+
+// fourth change
 
 /*******************
 ** ANIMATION LOOP **
@@ -193,7 +227,7 @@ const animation = () =>
     // Request next frame
     window.requestAnimationFrame(animation)
 
-
+    //FOG MODIFIER
     scene.fog = new THREE.Fog( 0x2c5ccc, 1, 17 );
 }
 
