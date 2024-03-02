@@ -93,7 +93,7 @@ scene.add(torusKnot)
 const geometry = new THREE.TorusGeometry( 2.5, .2, 20, 30 ); 
 const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } ); 
 const torus = new THREE.Mesh( geometry, material ); scene.add( torus );
-torus.position.set(6, -3, .2)
+torus.position.set(4, -4, .5)
 torus.rotation.set(0,80,0)
 torus.castShadow = true
 
@@ -218,11 +218,28 @@ document.querySelector('#first-change').onclick = function() {
 
 // second change
 document.querySelector('#second-change').onclick = function() {
- 
+ domObject.secondChange = true
 }
 // third change
+document.querySelector('#third-change').onclick = function() {
+ 
+}
 
 // fourth change
+document.querySelector('#fourth-change').onclick = function() {
+ 
+}
+
+// fifth change
+document.querySelector('#fifth-change').onclick = function() {
+ 
+}
+
+//sixth change
+document.querySelector('#sixth-change').onclick = function() {
+ 
+}
+
 
 /*******************
 ** ANIMATION LOOP **
@@ -262,8 +279,10 @@ if(domObject.firstChange){
 }
 
 //second-change
-if(domObject.thirdChange){
-
+if(domObject.secondChange){
+    // torus.position.y = 3.5
+    domObject.firstChange = false
+    domObject.secondChange = true
 }
 
 // third-change
@@ -276,7 +295,15 @@ if(domObject.fourthChange){
 
 }
 
+// fifth-change
+if(domObject.fifthChange){
 
+}
+
+// sixth-change
+if(domObject.sixthChange){
+
+}
     // Renderer
     renderer.render(scene, camera)
 
