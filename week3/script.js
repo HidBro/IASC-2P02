@@ -64,9 +64,9 @@ const animation = () =>
     testCube.rotation.z = elapsedTime
 
     // Scale cube
-    testCube.scale.x = Math.sin(elapsedTime * 0.5) * 2
-    testCube.scale.y = Math.sin(elapsedTime * 0.5) * 2
-    testCube.scale.z = Math.sin(elapsedTime * 0.5) * 2
+    testCube.position.x = Math.sin(elapsedTime * 0.5) * 2
+    testCube.position.y = Math.sin(elapsedTime * 0.5) * 2
+    testCube.position.z = Math.sin(elapsedTime * 0.5) * 2
 
     // Renderer
     renderer.render(scene, camera)

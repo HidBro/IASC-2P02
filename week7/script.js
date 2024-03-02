@@ -90,6 +90,15 @@ scene.add(torusKnot)
 // torusKnot.castShadow = true
 // scene.add(torus)
 
+const geometry = new THREE.TorusGeometry( 2.5, .2, 20, 30 ); 
+const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } ); 
+const torus = new THREE.Mesh( geometry, material ); scene.add( torus );
+torus.position.set(6, -3, .2)
+torus.rotation.set(0,80,0)
+torus.castShadow = true
+
+
+
 // SUN
 const sunGeometry = new THREE.SphereGeometry()
 const sunMaterial = new THREE.MeshLambertMaterial({
@@ -125,6 +134,9 @@ scene.add(directionalLight)
 // Directional Light Helper
 //const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
 //scene.add(directionalLightHelper)
+
+
+
 
 /*******
 ** UI **
@@ -172,6 +184,17 @@ lightPositionFolder
 ** DOM INTERACTIONS **
 **********************/
 
+// domObject
+const domObject = {
+    firstChange: false,
+    secondChange: false,
+    thirdChange: false,
+    fourthChange: false,
+    fifthChange: false,
+    sixthChange: false,
+    seventhChange: false,
+}
+
 //continue-reading
 document.querySelector('#continue-reading').onclick = function() {
     document.querySelector('#part-two').classList.remove('hidden')
@@ -188,9 +211,15 @@ document.querySelector('#restart').onclick = function() {
 
 
 // first change
+document.querySelector('#first-change').onclick = function() {
+    domObject.firstChange = true
+
+}
 
 // second change
-
+document.querySelector('#second-change').onclick = function() {
+ 
+}
 // third change
 
 // fourth change
@@ -208,7 +237,8 @@ const animation = () =>
 
     // Animate Objects
     torusKnot.rotation.y = elapsedTime
-    torusKnot.position.z = Math.sin(elapsedTime * 0.5) * 2
+
+    torusKnot.position.z = Math.sin(elapsedTime * 0.5) 
 
     // Update directionalLightHelper
     //directionalLightHelper.update()
@@ -221,6 +251,32 @@ const animation = () =>
     // Controls
     controls.update()
 
+    // DOM INTERACTIONS
+// first-change
+if(domObject.firstChange){
+    // torusKnot.rotation.y = Math.sin(elapsedTime * 1)
+    // torusKnot.rotation.z = elapsedTime
+    // torus.position.y = elapsedTime
+    torus.castShadow = true
+    torus.position.y = Math.cos(elapsedTime *2.6) *4;     
+}
+
+//second-change
+if(domObject.thirdChange){
+
+}
+
+// third-change
+if(domObject.thirdChange){
+
+}
+
+// fourth-change
+if(domObject.fourthChange){
+
+}
+
+
     // Renderer
     renderer.render(scene, camera)
 
@@ -228,7 +284,7 @@ const animation = () =>
     window.requestAnimationFrame(animation)
 
     //FOG MODIFIER
-    scene.fog = new THREE.Fog( 0x2c5ccc, 1, 17 );
+    scene.fog = new THREE.Fog( 0x2c50cc, 1, 17 );
 }
 
 animation()
