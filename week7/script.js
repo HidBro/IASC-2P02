@@ -64,7 +64,7 @@ scene.add(caveWall)
 const barrierWallGeometry = new THREE.PlaneGeometry(20, 2)
 const barrierWall = new THREE.Mesh(barrierWallGeometry, caveMaterial)
 barrierWall.rotation.y = Math.PI * 0.5
-barrierWall.position.set(10, -1.5, 0)
+barrierWall.position.set(10, -3.5, 0)
 scene.add(barrierWall)
 
 // caveFloor
@@ -90,10 +90,12 @@ scene.add(torusKnot)
 // torusKnot.castShadow = true
 // scene.add(torus)
 
-const geometry = new THREE.TorusGeometry( 2.5, .2, 20, 30 ); 
+const geometry = new THREE.TorusGeometry( 1.5, .15, 20, 30 ); 
 const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } ); 
 const torus = new THREE.Mesh( geometry, material ); scene.add( torus );
-torus.position.set(1.5, -5, -.1)
+// torus.position.set(1.5, -5, -.1)
+torus.position.y = (-12)
+torus.position.x = (2)
 torus.rotation.set(0,80,10)
 torus.castShadow = true
 
@@ -125,7 +127,7 @@ scene.add(sun)
 //     0.5
 // )
 
-const light = new THREE.PointLight( 0x0b0A17, 57500, 900 );
+const light = new THREE.PointLight( 0x0b0A17, 70500, 90000 );
 // THREE.PointLightLight.target = caveWall
 light.position.set(23, 9, 0)
 light.castShadow = true; // default false
@@ -202,6 +204,8 @@ const domObject = {
     fifthChange: false,
     sixthChange: false,
     seventhChange: false,
+    eighthChange: false,
+    restart: false,
 }
 
 //continue-reading
@@ -216,6 +220,8 @@ document.querySelector('#continue-reading').onclick = function() {
 document.querySelector('#restart').onclick = function() {
     document.querySelector("#part-two").classList.add('hidden')
     document.querySelector('#part-one').classList.remove('hidden')
+    domObject.restart = true
+    domObject.fourthChange = false;
 }
 
 
@@ -230,25 +236,32 @@ document.querySelector('#second-change').onclick = function() {
  domObject.secondChange = true
 }
 // third change
-document.querySelector('#third-change').onclick = function() {
-    domObject.thirdChange = true
+document.querySelector('#eighth-change').onclick = function() {
+    domObject.eighthChange = true
     
 }
 
 // fourth change
-document.querySelector('#fourth-change').onclick = function() {
+document.querySelector('#eighth-change').onclick = function() {
+    domObject.eighthChange = true;
     
 }
 
 // fifth change
 document.querySelector('#fifth-change').onclick = function() {
- 
+    domObject.fifthChange = true;
 }
 
 //sixth change
 document.querySelector('#sixth-change').onclick = function() {
- 
+ domObject.sixthChange = true;
 }
+
+//seventh change
+document.querySelector('#seventh-change').onclick = function() {
+    domObject.seventhChange = true;}
+    
+
 
 
 /*******************
@@ -296,26 +309,44 @@ if(domObject.secondChange){
 }
 
 // third-change
-if(domObject.thirdChange){
-    light.position.set(25, 9, 0)
+if(domObject.eighthChange){
 
+    light.intensity = 20000
+    // torusKnot.position.y = (4)
+    // torusKnot.position.x = (3)
 }
 
 // fourth-change
 if(domObject.fourthChange){
     camera.position.set(20, 10, 25)
- 
+    // scene.fog = new THREE.Fog( 0xb888dc, 15, 1);
 }
 
 // fifth-change
 if(domObject.fifthChange){
+    light.position.y = (elapsedTime + 3);
 
 }
 
 // sixth-change
 if(domObject.sixthChange){
+    torusKnot.castShadow = false
+}
+
+// seventh-change
+if(domObject.seventhChange){
+    torusKnot.castShadow = true
+    torus.position.set(2, 6, 4)
+    light.position.set(19, 7, 0)
+}
+
+// restart
+if(domObject.restart){
+    domObject.fourthChange = false;
+    camera.position.set(1, -.00211, 0)
 
 }
+
     // Renderer
     renderer.render(scene, camera)
 
@@ -323,7 +354,7 @@ if(domObject.sixthChange){
     window.requestAnimationFrame(animation)
 
     //FOG MODIFIER
-    scene.fog = new THREE.Fog( 0x2c50cc, 1, 17 );
+    scene.fog = new THREE.Fog( 0xb888dc, 6.8, 4.5 );
 }
 
 animation()

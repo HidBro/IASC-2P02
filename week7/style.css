@@ -25,6 +25,7 @@ p{
 
 .clickable{
         cursor: pointer;
+        color:rgb(253, 145, 145);
 }
 
 .clickable:hover{
