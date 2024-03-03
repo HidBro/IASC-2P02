@@ -23,7 +23,7 @@ const scene = new THREE.Scene()
 
 // Camera
 const camera = new THREE.PerspectiveCamera(
-    75,
+    60,
     sizes.aspectRatio,
     0.1,
     100
@@ -61,14 +61,14 @@ caveWall.receiveShadow = true
 scene.add(caveWall)
 
 // barrierWall
-const barrierWallGeometry = new THREE.PlaneGeometry(10, 2)
+const barrierWallGeometry = new THREE.PlaneGeometry(20, 2)
 const barrierWall = new THREE.Mesh(barrierWallGeometry, caveMaterial)
 barrierWall.rotation.y = Math.PI * 0.5
-barrierWall.position.set(5, -1.5, 0)
+barrierWall.position.set(10, -1.5, 0)
 scene.add(barrierWall)
 
 // caveFloor
-const caveFloorGeometry = new THREE.PlaneGeometry(10, 10)
+const caveFloorGeometry = new THREE.PlaneGeometry(20, 20)
 const caveFloor = new THREE.Mesh(caveFloorGeometry, caveMaterial)
 caveFloor.rotation.x = Math.PI * 0.5
 caveFloor.position.set(0, -2.5, 0)
@@ -93,8 +93,8 @@ scene.add(torusKnot)
 const geometry = new THREE.TorusGeometry( 2.5, .2, 20, 30 ); 
 const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } ); 
 const torus = new THREE.Mesh( geometry, material ); scene.add( torus );
-torus.position.set(4, -4, .5)
-torus.rotation.set(0,80,0)
+torus.position.set(1.5, -5, -.1)
+torus.rotation.set(0,80,10)
 torus.castShadow = true
 
 
@@ -120,16 +120,25 @@ scene.add(sun)
 // */
 
 // Direcional Light
-const directionalLight = new THREE.DirectionalLight(
-    new THREE.Color('white'),
-    0.5
-)
-directionalLight.target = caveWall
-directionalLight.position.set(10, 2.5, 0)
-directionalLight.castShadow = true
-directionalLight.shadow.mapSize.width = 1024
-directionalLight.shadow.mapSize.height = 1024
-scene.add(directionalLight)
+// const directionalLight = new THREE.DirectionalLight(
+//     new THREE.Color('white'),
+//     0.5
+// )
+
+const light = new THREE.PointLight( 0x0b0A17, 57500, 900 );
+// THREE.PointLightLight.target = caveWall
+light.position.set(23, 9, 0)
+light.castShadow = true; // default false
+// THREE.PointLightLight.castShadow = true
+// directionalLight.shadow.mapSize.width = 1024
+// directionalLight.shadow.mapSize.height = 1024
+scene.add( light );
+
+light.shadow.mapSize.width = 2000; // default
+light.shadow.mapSize.height = 2000; // default
+light.shadow.camera.near = 0.5; // default
+light.shadow.camera.far = 500; // default
+
 
 // Directional Light Helper
 //const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight)
@@ -200,7 +209,7 @@ document.querySelector('#continue-reading').onclick = function() {
     document.querySelector('#part-two').classList.remove('hidden')
     document.querySelector('#part-one').classList.add('hidden')
     domObject.part = 2
-    
+    domObject.fourthChange = true;
 }
 
 // restart
@@ -222,12 +231,13 @@ document.querySelector('#second-change').onclick = function() {
 }
 // third change
 document.querySelector('#third-change').onclick = function() {
- 
+    domObject.thirdChange = true
+    
 }
 
 // fourth change
 document.querySelector('#fourth-change').onclick = function() {
- 
+    
 }
 
 // fifth change
@@ -261,7 +271,7 @@ const animation = () =>
     //directionalLightHelper.update()
 
     // Update sun position to match directionalLight position
-    sun.position.copy(directionalLight.position)
+    sun.position.copy( light.position)
 
     console.log(camera.position)
 
@@ -287,12 +297,14 @@ if(domObject.secondChange){
 
 // third-change
 if(domObject.thirdChange){
+    light.position.set(25, 9, 0)
 
 }
 
 // fourth-change
 if(domObject.fourthChange){
-
+    camera.position.set(20, 10, 25)
+ 
 }
 
 // fifth-change
