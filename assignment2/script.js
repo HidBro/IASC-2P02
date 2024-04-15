@@ -20,7 +20,7 @@ const canvas = document.querySelector('.webgl')
 
 // Scene
 const scene = new THREE.Scene()
-scene.background = new THREE.Color('gray')
+scene.background = new THREE.Color('#fabebe')
 
 // Camera
 const camera = new THREE.PerspectiveCamera(
@@ -54,23 +54,23 @@ scene.add(directionalLight)
 ** MESHES **
 ************/
 // Cube Geometry
-const cubeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
+const cubeGeometry = new THREE.CylinderGeometry( .5, .5, .5, 5 )
 
 // Cube Materials
-const redMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('red')
+const redMaterial = new THREE.MeshMatcapMaterial({
+    color: new THREE.Color('#f2deb1')
 })
-const greenMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('green')
+const greenMaterial = new THREE.MeshMatcapMaterial({
+    color: new THREE.Color('#ff9191')
 })
-const blueMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('blue')
+const blueMaterial = new THREE.MeshToonMaterial({
+    color: new THREE.Color('#468cc2')
 })
 
 const drawCube = (i, material) =>
 {
     const cube = new THREE.Mesh(cubeGeometry, material)
-    cube.position.x = (Math.random() - 0.5) * 10
+    cube.position.x = (Math.random() - 0.5) * 23
     cube.position.z = (Math.random() - 0.5) * 10
     cube.position.y = i - 10
 
@@ -90,9 +90,9 @@ let preset = {}
 const uiobj = {
     text: '',
     textArray: [],
-    term1: 'lovers',
-    term2: 'house',
-    term3: 'poison',
+    term1: 'wall',
+    term2: 'capulet',
+    term3: 'montague',
     rotateCamera: false
 }
 
@@ -172,11 +172,11 @@ const ui = new dat.GUI({
         .name(`${uiobj.term3}`)
 
     // Camera Folder
-    const cameraFolder = ui.addFolder('Camera')
+    // const cameraFolder = ui.addFolder('Camera')
 
-    cameraFolder
-        .add(uiobj, 'rotateCamera')
-        .name('Rotate Camera')
+    // cameraFolder
+    //     .add(uiobj, 'rotateCamera')
+    //     .name('Rotate Camera')
 
 /*******************
 ** ANIMATION LOOP **

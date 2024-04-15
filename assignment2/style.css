@@ -1,17 +1,21 @@
 /* Body */
 body {
+    background-color: #1b415e;
     margin: 0 auto;
     width: 80%;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 p {
+    
     font-size: 16px;
+    color: rgb(224, 224, 224);
 }
 
 /* Headers */
 h1, h2 {
     text-align: center;
+    color: white;
 }
 
 h1 {
@@ -70,25 +74,25 @@ ul > li {
 }
 
 #lil-gui-name-1  {
-    color: red;
+    color: #f2deb1;
 }
 
 #lil-gui-name-2  {
-    color: green;
+    color: #ff9191;
 }
 
 #lil-gui-name-3  {
-    color: blue;
+    color: #468cc2;
+}
+
+#lil-gui-name-4 {
+    color: #e38424;
 }
 
 #lil-gui-name-5 {
-    color: orange;
+    color: #5bd1fc;
 }
 
 #lil-gui-name-6 {
-    color: pink;
-}
-
-#lil-gui-name-7 {
-    color: aqua;
+    color: #871674;
 }

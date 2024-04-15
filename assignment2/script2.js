@@ -20,7 +20,7 @@ const canvas = document.querySelector('.webgl2')
 
 // Scene
 const scene = new THREE.Scene()
-scene.background = new THREE.Color('gray')
+scene.background = new THREE.Color('#b8d0d1')
 
 // Camera
 const camera = new THREE.PerspectiveCamera(
@@ -54,24 +54,24 @@ scene.add(directionalLight)
 ** MESHES **
 ************/
 // Sphere Geometry
-const sphereGeometry = new THREE.SphereGeometry(0.5)
+const sphereGeometry = new THREE.IcosahedronGeometry( .5, 0)
 
 // Sphere Materials
-const orangeMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('orange')
+const orangeMaterial = new THREE.MeshToonMaterial({
+    color: new THREE.Color('#e38424')
 })
-const pinkMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('pink')
+const pinkMaterial = new THREE.MeshMatcapMaterial({
+    color: new THREE.Color('#5bd1fc')
 })
-const aquaMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('aqua')
+const aquaMaterial = new THREE.MeshMatcapMaterial({
+    color: new THREE.Color('#871674')
 })
 
 const drawSphere = (i, material) =>
 {
     const sphere = new THREE.Mesh(sphereGeometry, material)
-    sphere.position.x = (Math.random() - 0.5) * 10
-    sphere.position.z = (Math.random() - 0.5) * 10
+    sphere.position.x = (Math.random() - 0.5) * 18
+    sphere.position.z = (Math.random() - 0.5) * 18
     sphere.position.y = i - 10
 
     sphere.rotation.x = Math.random() * 2 * Math.PI
@@ -84,6 +84,7 @@ const drawSphere = (i, material) =>
 }
 
 
+
 /**********************
 ** TEXT PARSERS & UI **
 ***********************/
@@ -92,10 +93,11 @@ let preset = {}
 const uiobj = {
     text: '',
     textArray: [],
-    term1: 'Romeo',
-    term2: 'Capulet',
-    term3: 'Juliet',
-    rotateCamera: false,
+    term1: 'death',
+    term2: 'juliet',
+    term3: 'friar',
+
+    rotateCamera: true,
     animateBubbles: false
 }
 
@@ -174,16 +176,16 @@ const ui = new dat.GUI({
         .add(aquaMaterial, 'visible')
         .name(`${uiobj.term3}`)
 
-    spheresFolder
-        .add(uiobj, 'animateBubbles')
-        .name('Animate Bubbles')
+    // spheresFolder
+    //     .add(uiobj, 'animateBubbles')
+    //     .name('Animate Bubbles')
 
     // Camera Folder
-    const cameraFolder = ui.addFolder('Camera')
+    // const cameraFolder = ui.addFolder('Camera')
 
-    cameraFolder
-        .add(uiobj, 'rotateCamera')
-        .name('Rotate Camera')
+    // cameraFolder
+    //     .add(uiobj, 'rotateCamera')
+    //     .name('Rotate Camera')
 
 /*******************
 ** ANIMATION LOOP **
@@ -203,22 +205,22 @@ const animation = () =>
     // Camera Rotation
     if(uiobj.rotateCamera)
     {
-        camera.position.x = Math.sin(elapsedTime * 0.2) * 16
-        camera.position.z = Math.cos(elapsedTime * 0.2) * 16
+        camera.position.x = Math.sin(elapsedTime * 1.5) * 16
+    
     }
 
     // Animate Bubbles
-    if(uiobj.animateBubbles){
-        for(let i=0; i < scene.children.length; i++)
-        {
-            if(scene.children[i].type === "Mesh")
-            {
-                scene.children[i].scale.x = Math.sin(elapsedTime * scene.children[i].randomizer)
-                scene.children[i].scale.y = Math.sin(elapsedTime * scene.children[i].randomizer)
-                scene.children[i].scale.z = Math.sin(elapsedTime * scene.children[i].randomizer)
-            }
-        }
-    }
+    // if(uiobj.animateBubbles){
+    //     for(let i=0; i < scene.children.length; i++)
+    //     {
+    //         if(scene.children[i].type === "Mesh")
+    //         {
+    //             scene.children[i].scale.x = Math.sin(elapsedTime * scene.children[i].randomizer)
+    //             scene.children[i].scale.y = Math.sin(elapsedTime * scene.children[i].randomizer)
+    //             scene.children[i].scale.z = Math.sin(elapsedTime * scene.children[i].randomizer)
+    //         }
+    //     }
+    // }
 
     // Renderer
     renderer.render(scene, camera)
